@@ -1,0 +1,25 @@
+body {
+    background: url('/assets/images/Background.png') repeat-y;
+    background-size: 100% auto;
+    width: 100%;
+  }
+.radiobox {
+    height: 45px;
+    background: white;
+    border: 1px solid black;
+  }
+.custom-jumbtron {
+  margin-top: 100px;
+  background:#f3f3c8;
+  border-radius: 7px;
+  padding: 2%;
+}
+.custom-left {
+  margin-left: 18px;
+}
+.custom-inline {
+  margin-top: 10px;
+} 
+.backgroundYellow{
+  background-color: yellow;
+}

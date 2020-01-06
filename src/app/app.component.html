@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>formify Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+  <div class="jumbotron custom-jumbtron" >
+<div class="form-group">
+      <label for="email">Title Code:</label><br>
+      
+      <div class="row">
+       
+        <div class="col-sm-3 radiobox custom-left" (click)="setCodeValue('MR', 'TITLE_CODE')" [ngClass]="{'backgroundYellow' : f.TITLE_CODE.value=='MR'}" >
+          <label class="radio-inline custom-inline">
+          <input type="radio" [checked]="f.TITLE_CODE.value=='MR'" name="TITLE_CODE" formControlName="TITLE_CODE" [value]="MR" >&nbsp;MR.
+        </label>
+        </div>   
+        <div class="col-sm-3 radiobox" (click)="setCodeValue('MRS', 'TITLE_CODE')" [ngClass]="{'backgroundYellow' : f.TITLE_CODE.value=='MRS'}">
+          <label class="radio-inline custom-inline">
+          <input type="radio" [checked]="f.TITLE_CODE.value=='MRS'" name="TITLE_CODE" formControlName="TITLE_CODE" [value]="MRS" >&nbsp;MRS.
+        </label>  
+        </div>
+        <div class="col-sm-3 radiobox" (click)="setCodeValue('MISS', 'TITLE_CODE')" [ngClass]="{'backgroundYellow' : f.TITLE_CODE.value=='MISS'}">
+          <label class="radio-inline custom-inline">
+          <input type="radio" [checked]="f.TITLE_CODE.value=='MISS'" name="TITLE_CODE" formControlName="TITLE_CODE" [value]="MISS" >&nbsp;MISS.
+        </label>
+        </div>
+      
+      </div>
+      <div *ngIf="registerForm.get('TITLE_CODE').invalid && submitted" [ngClass]="{ 'is-invalid': submitted  && f.TITLE_CODE.errors }"> 
+        <div *ngIf="f.TITLE_CODE.errors.required">Required</div>
+     </div>	
+    </div>
+        
+ <div class="form-group">
+      <label for="email">First name:</label>
+      <input type="text" formControlName="FIRST_NAME" class="form-control" [ngClass]="{ 'is-invalid':((submitted || f.FIRST_NAME.touched) && f.FIRST_NAME.errors) }" />
+      <div *ngIf="submitted || f.FIRST_NAME.touched && f.FIRST_NAME.errors" class="invalid-feedback">
+      <div *ngIf="f.FIRST_NAME.errors" >Required</div>
+      </div>
+    </div> 
+      
+    <div class="form-group">
+      <label for="email">Mobile number:</label>
+      <input type="number" formControlName="MOBILE_NUMBER" class="form-control" [ngClass]="{ 'is-invalid':((submitted || f.MOBILE_NUMBER.touched) && f.MOBILE_NUMBER.errors) }" />
+      <div *ngIf="submitted || f.MOBILE_NUMBER.touched && f.MOBILE_NUMBER.errors" class="invalid-feedback">
+      <div *ngIf="f.MOBILE_NUMBER.errors">Required</div>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="email">Nationality:</label>
+      <select formControlName="NATIONALITY" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.NATIONALITY.errors }"  >
+        <option   [value]="">Select</option> 
+        <option *ngFor="let p of nationality"   [value]="p.countryname">
+          {{p.countryname}} 
+        </option>
+      </select> 
+      <div *ngIf="submitted || f.NATIONALITY.is-touched && f.NATIONALITY.errors" class="invalid-feedback">
+        <div *ngIf="f.NATIONALITY.errors">Required</div>
+    </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="email">Birth date:</label>
+      <input  type="date" class="form-control"  formControlName="BIRTH_DATE"/>
+      <div *ngIf="submitted " >Required
+        
+    </div>
+    </div>
+      
+      <div class="form-group">
+      <label for="email">Address:</label>
+      <input type="text" formControlName="ADDRESS" class="form-control" [ngClass]="{ 'is-invalid':((submitted || f.ADDRESS.touched) && f.ADDRESS.errors) }" />
+      <div *ngIf="submitted || f.ADDRESS.touched && f.ADDRESS.errors" class="invalid-feedback">
+      <div *ngIf="f.ADDRESS.errors">Required</div>
+      </div>
+    </div>
+
+<div class="form-group">
+      <label for="email">Address Stay duration:</label>
+      <input type="number" formControlName="ADDRESS_STAY_DURATION" class="form-control" [ngClass]="{ 'is-invalid': ((submitted || f.ADDRESS_STAY_DURATION.touched) && f.ADDRESS_STAY_DURATION.errors) }" />
+      <div *ngIf="submitted || f.ADDRESS_STAY_DURATION.touched && f.ADDRESS_STAY_DURATION.errors" class="invalid-feedback">
+      <div *ngIf="f.ADDRESS_STAY_DURATION.errors">Required</div>
+      </div>
+    </div>
+    
+    <div class="form-group">   
+      <label for="pwd">Marital Status:</label>
+      <div class="row">
+          
+        <div class="col-sm-5 radiobox custom-left"  (click)="setCodeValue('Single', 'MARTITAL_STATUS'); maritalStatustoggle(false);" [ngClass]="{'backgroundYellow' : f.MARTITAL_STATUS.value=='Single'}">
+          <label class="radio-inline custom-inline" >
+          <input type="radio" [checked]="f.MARTITAL_STATUS.value=='Single'" name ="MARTITAL_STATUS" formControlName="MARTITAL_STATUS" (click)="maritalStatustoggle(false)" value="Single"  >&nbsp;Single.
+        </label>
+        </div>
+        <div class="col-sm-5 radiobox"  (click)="setCodeValue('Married', 'MARTITAL_STATUS'); maritalStatustoggle(true);" [ngClass]="{'backgroundYellow' : f.MARTITAL_STATUS.value=='Married'}">
+          <label class="radio-inline custom-inline" >
+          <input type="radio" [checked]="f.MARTITAL_STATUS.value=='Married'" name ="MARTITAL_STATUS" formControlName="MARTITAL_STATUS" (click)="maritalStatustoggle(true)" value="Married" >&nbsp;Married.
+        </label>
+        </div>
+              
+      </div>
+      <div *ngIf="registerForm.get('MARTITAL_STATUS').invalid && submitted" [ngClass]="{ 'is-invalid': submitted && f.MARTITAL_STATUS.errors }"> 
+			  <div *ngIf="f.MARTITAL_STATUS.errors.required">Required</div>
+		 </div>	
+    </div>  
+        
+
+
+  
+    <div class="form-group" *ngIf="showDiv">
+      <label for="email">Spouse name:</label>
+      <input  type="text" formControlName="SPOUSE_NAME" class="form-control" [ngClass]="{ 'is-invalid':((submitted || f.SPOUSE_NAME.touched) && f.SPOUSE_NAME.errors) }" />
+      <div *ngIf="submitted || f.SPOUSE_NAME.touched && f.SPOUSE_NAME.errors" class="invalid-feedback">
+      <div *ngIf="f.SPOUSE_NAME.errors">Required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">NEXT</button>
+      
+    </div>
+    
+</div>
+</form>
+</div>
+</body>
+</html>
